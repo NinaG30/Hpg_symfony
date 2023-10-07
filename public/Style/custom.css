@@ -1,0 +1,38 @@
+body {
+   
+   
+    font-family: 'open sans','HelveticaNeue','Helvetica Neue','Helvetica-Neue',Helvetica,Arial,sans-serif;
+}
+
+header{
+    background:#F26B08; 
+    font-family: 'open sans','HelveticaNeue','Helvetica Neue','Helvetica-Neue',Helvetica,Arial,sans-serif;
+    text-align:center;
+    padding:10px;
+}
+
+header h1 {
+    color:#eaeaea;
+}
+
+section {
+    padding:10px 0;
+    background:#e8e8e8;
+    color:#573D39; 
+   
+}
+
+section button {
+    width:100%;
+    background:#F26B08;
+    border:none;
+    border-radius:5px;
+    color:#e8e8e8;
+}
+
+footer{
+    width:100%;
+    background:black;
+    color:white;
+    text-align:center;
+}

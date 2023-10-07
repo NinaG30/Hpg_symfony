@@ -3,40 +3,58 @@
 <html>
 <head>
     <title>Simulateur pour votre installation photovoltaique</title>
+    <link rel="stylesheet" href="{{ asset('Style/custom.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 <body>
-    <h1>{{ message }}</h1>
+    <header>
+    <h1>Simulateur pour votre installation photovoltaique</h1>
+    </header>
     <section>
-        {{ form_start(form) }}
-        {{ form_row(form.nom, {'attr': {'class': 'form-control'}}) }}
-        {{ form_row(form.prenom, {'attr': {'class': 'form-control'}}) }}
-        {{ form_row(form.longueurToiture, {'attr': {'class': 'form-control'}}) }}
-        {{ form_row(form.largeurToiture, {'attr': {'class': 'form-control'}}) }}
-        {{ form_row(form.montantFacture, {'attr': {'class': 'form-control'}}) }}
-        <div class="d-flex justify-content-center align-items-center">
-        <button type="submit" class="btn btn-primary p-3 m-3">Valider</button>
-        </div>
-        {{ form_end(form) }}
-        {% if nBP is defined %}
-         <div class="alert alert-success mt-3">
-                Nombre panneaux requis : {{ nBP }}
-            </div> 
+ <div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-6">
+                    {{ form_start(form) }}
+                    {{ form_row(form.nom, {'attr': {'class': 'form-control mb-3'}}) }}
+                    {{ form_row(form.prenom, {'attr': {'class': 'form-control mb-3'}}) }}
+                    {{ form_row(form.longueurToiture, {'attr': {'class': 'form-control mb-3'}}) }}
+                    {{ form_row(form.largeurToiture, {'attr': {'class': 'form-control mb-3'}}) }}
+                    {{ form_row(form.montantFacture, {'attr': {'class': 'form-control mb-3'}}) }}
+                    <div class="d-flex justify-content-center align-items-center">
+                        <button type="submit" class="p-3 mt-3">Valider</button>
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+                <div class="col-md-6">
+                    {% if nBP is defined %}
+                        <div class="alert alert-success mt-3">
+                            Nombre de panneaux requis : {{ nBP }}
+                        </div>
 
-                 <div class="alert alert-success mt-3">
-                Ce que représente le nombre de panneaux aux m² : {{ nBPToiture }}
-            </div>   
-                   <div class="alert alert-success mt-3">
-                Surface toiture actuelle en m² : {{ SurfaceToiture }}
-            </div>     
-        {% endif %}
-         {% if result is defined %}
-                  <div class="alert alert-success mt-3">
-                {{ result }} % d'économie
-            </div> 
-          {% endif %}
- 
-   
-    </section>
+                        <div class="alert alert-success mt-3">
+                            Ce que représente le nombre de panneaux aux m² : {{ nBPToiture }}
+                        </div>
+
+                        <div class="alert alert-success mt-3">
+                            Surface de toiture actuelle en m² : {{ SurfaceToiture }}
+                        </div>
+                    {% endif %}
+
+                    {% if result is defined %}
+                        <div class="alert alert-success mt-3">
+                            {{ result }} % d'économie
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</section>
+<footer>
+<p>Simulateur réalisé par Nina Guémart</p>
+</footer>
 </body>
 </html>
