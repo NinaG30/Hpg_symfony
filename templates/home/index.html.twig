@@ -19,10 +19,10 @@
 						<h2>Simulation</h2>
 						{{ form_start(form) }}
 						{{ form_row(form.nom) }}
-						{{ form_row(form.prenom, {'attr': {'class': 'form-control mb-3'}}) }}
-						{{ form_row(form.longueurToiture, {'attr': {'class': 'form-control mb-3'}}) }}
-						{{ form_row(form.largeurToiture, {'attr': {'class': 'form-control mb-3'}}) }}
-						{{ form_row(form.montantFacture, {'attr': {'class': 'form-control mb-3'}}) }}
+						{{ form_row(form.prenom) }}
+						{{ form_row(form.longueurToiture) }} 
+						{{ form_row(form.largeurToiture) }}
+						{{ form_row(form.montantFacture) }}
 						<div class="d-flex justify-content-center align-items-center">
 							<button type="submit" class="btn btn-outline-success p-3 mt-3">Valider</button>
 						</div>
@@ -35,7 +35,7 @@
 							<div class="alert alert-success mt-3">
 								Vous avez besoin de
 								{{ depart_nBP }}
-								panneaux photovoltaiques pour une installation permettant de réaliser 70% d'économie sur votre facture annuelle.
+								panneaux photovoltaiques pour une installation permettant de réaliser 70% d'économie d'énergie.
 							</div>
 
 							<div class="alert alert-success mt-3">
@@ -49,7 +49,7 @@
 							<div class="alert alert-success mt-3">
 								Vous pouvez installer au maximum
 								{{ nBP }}
-								panneaux photovoltaiques sur votre toiture. Votre économie est estimée à
+								panneaux photovoltaiques sur votre toiture. Votre économie d'énergie est estimée à
 								{{ result }}
 								%.
 							</div>

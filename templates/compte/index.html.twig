@@ -11,20 +11,20 @@
 			<div class="row">
 				<div class="col-md-6">
 					<div class="form-group">
-						<label for="nom">Nom :</label>
-						<p class="form-control-static">{{ user.firstname }}</p>
+						<label for="nom">Nom</label>
+						<p class="form-control-static bg-light p-2">{{ user.firstname }}</p>
 					</div>
 				</div>
 				<div class="col-md-6">
 					<div class="form-group">
-						<label for="prenom">Prénom :</label>
-						<p class="form-control-static">{{ user.lastname }}</p>
+						<label for="prenom">Prénom</label>
+						<p class="form-control-static bg-light p-2">{{ user.lastname }}</p>
 					</div>
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="email">Email :</label>
-				<p class="form-control-static">{{ user.email }}</p>
+				<label for="email">Email</label>
+				<p class="form-control-static bg-light p-2">{{ user.email }}</p>
 			</div>
 		{% else %}
 			<p>Utilisateur non connecté</p>
@@ -36,6 +36,9 @@
 					<th>Longueur de la toiture</th>
 					<th>Largeur de la toiture</th>
 					<th>Montant de la facture</th>
+					<th>Panneaux conseillés</th>
+					<th>Panneaux installables</th>
+					<th>Economie estimée</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -47,11 +50,19 @@
 							mètres</td>
 						<td>{{ formData.montantFacture }}
 							euros</td>
+
+						{% set matchingResult = [] %}
+						{% for result in results %}
+							{% if result.formData == formData %}
+								{% set matchingResult = [result] %}
+							{% endif %}
+						{% endfor %}
+						<td>{{ matchingResult[0].panneauxNecessaires }}</td>
+						<td>{{ matchingResult[0].panneauxInstallables }}</td>
+						<td>{{ matchingResult[0].economie }}%</td>
 					</tr>
 				{% endfor %}
 			</tbody>
 		</table>
-
 	</section>
-
 {% endblock %}

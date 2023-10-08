@@ -23,7 +23,7 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // encode the plain password
+            //Encode le password
             $user->setPassword(
                 $userPasswordHasher->hashPassword(
                     $user,
@@ -31,12 +31,14 @@ class RegistrationController extends AbstractController
                 )
             );
 
+            //Role par défaut de tout novueau utilisateur
             $user->setRoles(['Client']);
 
+            //Rentre l'utilisateur dans la BDD
             $entityManager->persist($user);
             $entityManager->flush();
 
-            // Add a flash message to inform the user about successful registration
+            // Petit message d'information ne s'affichant qu'une seule fois
             $this->addFlash('success', 'Inscription réussie. Vous êtes maintenant connectés et pouvez accéder à votre compte.');
 
             return $userAuthenticator->authenticateUser(

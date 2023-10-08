@@ -21,32 +21,42 @@ class FormType extends AbstractType
             ])
             ->add('nom', TextType::class, [
                 'attr' => [
-                    'class' => 'form-control mb-3'
+                    'class' => 'form-control mb-3',
+
                 ],
+                'label' => 'Votre nom',
                 'constraints' => [new NotBlank()],
             ])
             ->add('prenom', TextType::class, [
                 'attr' => [
-                    'class' => 'form-control mb-3'
+                    'class' => 'form-control mb-3',
+
                 ],
+                'label' => 'Votre prénom',
                 'constraints' => [new NotBlank()],
             ])
             ->add('longueurToiture', NumberType::class, [
                 'attr' => [
-                    'class' => 'form-control mb-3'
+                    'class' => 'form-control mb-3',
+
                 ],
+                'label' => 'Longueur de votre toiture (en mètre)',
                 'constraints' => [new NotBlank()],
             ])
             ->add('largeurToiture', NumberType::class, [
                 'attr' => [
-                    'class' => 'form-control mb-3'
+                    'class' => 'form-control mb-3',
+                    
                 ],
+                'label' => 'Largeur de votre toiture (en mètre)',
                 'constraints' => [new NotBlank()],
             ])
             ->add('montantFacture', NumberType::class, [
                 'attr' => [
-                    'class' => 'form-control mb-3'
+                    'class' => 'form-control mb-3',
+                    
                 ],
+                'label' => 'Montant de votre facture annuelle',
                 'constraints' => [new NotBlank()],
             ]);
     }

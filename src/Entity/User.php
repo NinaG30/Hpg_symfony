@@ -34,14 +34,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'json')]
     private $roles = [];
 
-    #[ORM\OneToMany(mappedBy: 'user', targetEntity: FormData::class)]
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: FormData::class, cascade: ['persist', 'remove'])]
     private Collection $formData;
 
     public function __construct()
     {
         $this->formData = new ArrayCollection();
     }
-
 
     /**
      * A visual identifier that represents this user.
@@ -88,7 +87,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     }
 
 
-
     /**
      * @see UserInterface
      */
@@ -97,7 +95,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
     }
-
 
 
     public function getId(): ?int

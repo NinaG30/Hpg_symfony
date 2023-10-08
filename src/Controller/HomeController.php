@@ -11,6 +11,7 @@ use App\Entity\FormData;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Service\CalculService;
 use \Symfony\Bundle\SecurityBundle\Security;
+use App\Entity\Result;
 
 class HomeController extends AbstractController
 {
@@ -19,11 +20,12 @@ class HomeController extends AbstractController
 
     public function __construct(CalculService $calculService, Security $security)
     {
-        $this->calculService = $calculService; //Injection de dépendance
+         //Injection de dépendances
+        $this->calculService = $calculService;
         $this->security = $security;
     }
 
-    #[Route('/accueil', name: 'accueil')]
+    #[Route('/accueil', name: 'app_home')]    
     public function index(Request $request, EntityManagerInterface $entityManager): Response
     {
         $formData = new FormData();
@@ -37,11 +39,6 @@ class HomeController extends AbstractController
             $montantFacture = $formData->getMontantFacture();
             $lngToiture = $formData->getLongueurToiture();
             $largeurToiture = $formData->getLargeurToiture();
-
-            if ($this->security->getUser()) {
-                $user = $this->security->getUser();
-                dump($user);
-            }
 
             //Nombre de panneaux de 375 Wc nécessaires pour 70% d'économie
             $nBP = $this->calculService->effectuerCalcul($montantFacture, $lngToiture, $largeurToiture);
@@ -62,7 +59,7 @@ class HomeController extends AbstractController
             //Stocke la valeur initiale de $nBP
             $depart_nBP = $nBP;
 
-
+            //Permet de savoir combien de panneaux sont installables au maximum sur la toiture
             while ($nBPSurface >= $sT) {
                 $nBP--;
                 $nBPSurface = $lngP * $largeurP * $nBP;
@@ -72,19 +69,34 @@ class HomeController extends AbstractController
                 }
             }
 
-            // Calcule le % d'économie réalisé en fonction des panneaux installables sur la surface de la toiture
+            // Calcule le % d'économie en fonction des panneaux installables sur la surface de la toiture
             $result = round($nBP * 70 / $depart_nBP);
 
-            $user = $this->getUser();
+            //S'il y a un utilisateur connecté
+            if ($this->security->getUser()) {
 
+                //Je stocke l'utilisateur dans une variable 
+                $user = $this->security->getUser();
 
-            if ($user !== null) {
                 //Associe le user au formulaire
                 $formData->setUser($user);
-                dump($formData->setUser($user));
 
+                // Crée une nouvelle instance de l'entité Result
+                $resultEntity = new Result();
 
-                // Persiste l'entité en base de données
+                // Attribue les valeurs aux propriétés de l'entité Result
+                $resultEntity->setPanneauxNecessaires($depart_nBP);
+                $resultEntity->setPanneauxInstallables($nBP);
+                $resultEntity->setEconomie($result);
+
+                // Associe le formulaire à l'entité Result
+                $resultEntity->setFormData($formData);
+
+                // Persiste l'entité Result en base de données
+                $entityManager->persist($resultEntity);
+                $entityManager->flush();
+
+                // Persiste l'entité formData en base de données
                 $entityManager->persist($formData);
                 $entityManager->flush();
             }

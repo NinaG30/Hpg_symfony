@@ -65,7 +65,7 @@ class RegistrationFormType extends AbstractType
                     ]),
 
                 ],
-                'label' => 'Password',
+                'label' => 'Mot de passe',
             ]);
     }
 
