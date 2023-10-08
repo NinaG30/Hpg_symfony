@@ -33,7 +33,8 @@ Le site propose aux utilisateurs :
 
 ## Démarrage
 
-Lancer Docker 
+* Lancer Docker
+* Pour voir le site, cliquer sur le port du conteneur nginx
 
 ## Fabriqué avec
 
