@@ -2,13 +2,19 @@
 
 Simulateur en ligne permettant aux utilisateurs de dimensionner une installation photovoltaïque en fonction de leur toiture et de leur facture d'électricité mensuelle.
 
+Le site propose aux utilisateurs :
+
+- connectés ou non, de pouvoir lancer une simulation et obtenir son résultat
+- sans compte, de pouvoir s'inscrire et créer un compte
+- avec un compte, de pouvoir se connecter et consulter sa page de compte comportant ses informations et l'historique de ses simulations passées
+
 ## Démo
 
-[Lien à venir](https://vimeo.com/872302730?share=copy)
+[Video de démo](https://vimeo.com/872310611?share=copy#t=0)
 
 ## Pour commencer
 
-Cloner le repo dans un dossier app.
+Cloner le repo dans un dossier "app"
 
 ### Pré-requis
 
@@ -20,7 +26,7 @@ Executer la commande ``docker compose up -d``
 
 ## Démarrage
 
-Dites comment faire pour lancer votre projet
+Lancer Docker
 
 ## Fabriqué avec
 
