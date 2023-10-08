@@ -1,32 +1,22 @@
-# Titre du projet
-_(juste en dessous des badges sympatiques à placer)_
+# Simulateur
 
-[![forthebadge](http://forthebadge.com/images/badges/built-with-love.svg)](http://forthebadge.com)  [![forthebadge](http://forthebadge.com/images/badges/powered-by-electricity.svg)](http://forthebadge.com)
+Simulateur en ligne permettant aux utilisateurs de dimensionner une installation photovoltaïque en fonction de la leur toiture et de leur facture d'électricité mensuelle.
 
-Une petite description du projet
+## Démo
+
+https://www.youtube.com/watch?v=1o9EAFNv0o4
 
 ## Pour commencer
 
-Entrez ici les instructions pour bien débuter avec votre projet...
+Cloner le repo dans un dossier app.
 
 ### Pré-requis
 
-Ce qu'il est requis pour commencer avec votre projet...
-
-- Programme 1
-- Programme 2
-- etc...
+* Docker
 
 ### Installation
 
-Les étapes pour installer votre programme....
-
-Dites ce qu'il faut faire...
-
-_exemple_: Executez la commande ``telnet mapscii.me`` pour commencer ensuite [...]
-
-
-Ensuite vous pouvez montrer ce que vous obtenez au final...
+Executer la commande ``docker compose up -d`` 
 
 ## Démarrage
 
