@@ -28,6 +28,9 @@ class FormData
     #[ORM\Column]
     private ?int $montantFacture = null;
 
+    #[ORM\ManyToOne(inversedBy: 'formData')]
+    private ?User $user = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -89,6 +92,18 @@ class FormData
     public function setMontantFacture(int $montantFacture): static
     {
         $this->montantFacture = $montantFacture;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): static
+    {
+        $this->user = $user;
 
         return $this;
     }

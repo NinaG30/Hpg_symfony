@@ -9,67 +9,100 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Form\FormType;
 use App\Entity\FormData;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Service\CalculService;
+use \Symfony\Bundle\SecurityBundle\Security;
 
 class HomeController extends AbstractController
 {
+    private $calculService;
+    private $security;
+
+    public function __construct(CalculService $calculService, Security $security)
+    {
+        $this->calculService = $calculService; //Injection de dépendance
+        $this->security = $security;
+    }
+
     #[Route('/accueil', name: 'accueil')]
     public function index(Request $request, EntityManagerInterface $entityManager): Response
     {
         $formData = new FormData();
         $form = $this->createForm(FormType::class, $formData);
-    
+
         $form->handleRequest($request);
-       
+
         if ($form->isSubmitted() && $form->isValid()) {
-           
-             // Obtenir la valeur soumise du champ montantFacture
-             $montantFacture = $formData->getMontantFacture();
-             $lngToiture = $formData->getLongueurToiture();
-             $largeurToiture = $formData->getLargeurToiture();
 
-             // Effectuer le calcul
-             $resultatCalcul = $montantFacture / 0.20;
-             $prod = $resultatCalcul*0.7;
-             $d = round($prod / 1460);
-             $dWC = $d * 1000;
-             $nBP = ceil($dWC / 375);             
-             $sT =  $lngToiture*$largeurToiture;
-             $largueurP = 1.038;
-             $lngP = 1.755;
+            // Récupère les valeurs de mes champs soumis
+            $montantFacture = $formData->getMontantFacture();
+            $lngToiture = $formData->getLongueurToiture();
+            $largeurToiture = $formData->getLargeurToiture();
 
-             $nBPToiture = 1.755*1.038*$nBP;
-             $result=null;
-             $depart_nBP = $nBP;
-            
-            
-            while ($nBPToiture >= $sT) {
+            if ($this->security->getUser()) {
+                $user = $this->security->getUser();
+                dump($user);
+            }
+
+            //Nombre de panneaux de 375 Wc nécessaires pour 70% d'économie
+            $nBP = $this->calculService->effectuerCalcul($montantFacture, $lngToiture, $largeurToiture);
+
+            //Surface totale de la toiture en m²
+            $sT =  $lngToiture * $largeurToiture;
+
+            //Largeur d'un panneau photovoltaique
+            $largeurP = 1.038;
+            //Longueur d'un panneau photovoltaique
+            $lngP = 1.755;
+
+            //Surface totale des panneaux nécessaires pour 70% d'économie  
+            $nBPSurface = round($largeurP * $lngP * $nBP, 2);
+
+            $result = null;
+
+            //Stocke la valeur initiale de $nBP
+            $depart_nBP = $nBP;
+
+
+            while ($nBPSurface >= $sT) {
                 $nBP--;
-                $nBPToiture = 1.755 * 1.038 * $nBP;
-            
-                if ($nBPToiture < $sT) {
-                    $result = round($nBP*70/$depart_nBP);
+                $nBPSurface = $lngP * $largeurP * $nBP;
+
+                if ($nBPSurface < $sT) {
+                    $result = round($nBP * 70 / $depart_nBP);
                 }
             }
-            $result = round($nBP*70/$depart_nBP);
 
-            // Persister l'entité en base de données si nécessaire
-            // $entityManager->persist($formData);
-            // $entityManager->flush();
+            // Calcule le % d'économie réalisé en fonction des panneaux installables sur la surface de la toiture
+            $result = round($nBP * 70 / $depart_nBP);
 
-            return $this->render('home/index.html.twig', [  
+            $user = $this->getUser();
+
+
+            if ($user !== null) {
+                //Associe le user au formulaire
+                $formData->setUser($user);
+                dump($formData->setUser($user));
+
+
+                // Persiste l'entité en base de données
+                $entityManager->persist($formData);
+                $entityManager->flush();
+            }
+
+            return $this->render('home/index.html.twig', [
                 'message' => 'Formulaire à remplir :',
-                'form' => $form->createView(),              
-                // 'resultatCalcul' => $resultatCalcul, // Transmettez le résultat du calcul au modèle Twig
+                'form' => $form->createView(),
                 'nBP' => $nBP,
-                'nBPToiture' => $nBPToiture,
-                'SurfaceToiture' =>  $sT,           
-                 'result'=> $result,
+                'depart_nBP' => $depart_nBP,
+                'nBPSurface' => $nBPSurface,
+                'SurfaceToiture' =>  $sT,
+                'result' => $result,
             ]);
-        }  
+        }
 
         return $this->render('home/index.html.twig', [
             'message' => 'Formulaire à remplir :',
             'form' => $form->createView(),
         ]);
-}
+    }
 }

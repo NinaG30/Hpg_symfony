@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CompteController!
+{% endblock %}
+
+{% block body %}
+
+	<section class="container mt-5">
+		<h2>Informations du compte</h2>
+		{% if user is defined %}
+			<div class="row">
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="nom">Nom :</label>
+						<p class="form-control-static">{{ user.firstname }}</p>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<label for="prenom">Prénom :</label>
+						<p class="form-control-static">{{ user.lastname }}</p>
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="email">Email :</label>
+				<p class="form-control-static">{{ user.email }}</p>
+			</div>
+		{% else %}
+			<p>Utilisateur non connecté</p>
+		{% endif %}
+		<h2>Mes simulations passées</h2>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Longueur de la toiture</th>
+					<th>Largeur de la toiture</th>
+					<th>Montant de la facture</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for formData in formDatas %}
+					<tr>
+						<td>{{ formData.longueurToiture }}
+							mètres</td>
+						<td>{{ formData.largeurToiture }}
+							mètres</td>
+						<td>{{ formData.montantFacture }}
+							euros</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+
+	</section>
+
+{% endblock %}
