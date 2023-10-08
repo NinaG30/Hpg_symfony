@@ -1,0 +1,29 @@
+<header>
+	<h1>Simulateur pour votre installation photovoltaique</h1>
+	<nav>
+		<ul>
+			{% if app.user %}
+				<li>
+					<a href="{{ path('app_home') }}">Accueil</a>
+				</li>
+				<li>
+					<a href="{{ path('app_account') }}">Mon compte</a>
+				</li>
+				<li>
+					<a href="{{ path('app_logout') }}">Me déconnecter</a>
+				</li>
+			{% else %}
+				<li>
+					<a href="{{ path('app_home') }}">Accueil</a>
+				</li>
+				<li>
+					<a href="{{ path('app_register') }}">M'inscrire</a>
+				</li>
+				<li>
+					<a href="{{ path('app_login') }}">Me Connecter</a>
+				</li>
+
+			{% endif %}
+		</ul>
+	</nav>
+</header>
