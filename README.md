@@ -23,7 +23,6 @@ Le site propose aux utilisateurs :
 ### Pré-requis
 
 * Docker - https://www.docker.com/products/docker-desktop/
-* Composer (possiblement) - https://getcomposer.org/download/
 * Composer - https://getcomposer.org/download/
 * Git
 * Visual Studio code
