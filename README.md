@@ -16,8 +16,8 @@ Le site propose aux utilisateurs :
 
 - Créer un premier dossier
 - A l'intérieur, créer un dossier "app", entrer dedans puis ouvrir dans le terminal avec un clique droit et cloner le repo ( ``git clone https://github.com/NinaG30/Hpg_symfony.git``)
-- Toujours dans le premier dossier, créer un dossier "php" et copier/coller le Dockerfile du projet dedans
-- Aussi dans le premier dossier, créer un fichier "nginx" et copier/coller le default.conf
+- Toujours dans le premier dossier, créer un dossier "php" et copier/coller dedans le Dockerfile du projet dedans
+- Aussi dans le premier dossier, créer un fichier "nginx" et copier/coller dedans le default.conf
 - Dans le premier dossier, copier/coller le docker-compose.yml
 
 ### Pré-requis
