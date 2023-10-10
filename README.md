@@ -41,7 +41,7 @@ mv composer.phar /usr/local/bin/composer`` puis ``composer install``
 
 ## Démarrage
 
-* Pour voir le site, cliquez sur le port du conteneur nginx
+* Pour voir le site, cliquer sur le port du conteneur nginx
 
 ## Fabriqué avec
 
