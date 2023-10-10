@@ -32,7 +32,8 @@ Le site propose aux utilisateurs :
 
 * Lancer Docker Desktop
 * Dans le premier dossier ou se trouve le fichier "docker-compose.yml", ouvir dans le terminal et executer la commande ``docker compose up -d``  pour créer les conteneurs nécessaires
-* Executer la commande ``docker-compose exec php /bin/bash`` puis ``cd ../`` puis ``cd hgp_symfony`` puis ``cd Hpg_symfony`` puis ``php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+* Executer la commande ``docker-compose exec php /bin/bash`` puis ``cd ../`` puis ``cd hgp_symfony`` puis ``cd Hpg_symfony`` . Normalement vous obtenez quelque chose comme ceci : ``/var/www/hgp_symfony/Hpg_symfony#``
+* Executer la commande``php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
 php composer-setup.php
 php -r "unlink('composer-setup.php');"
 mv composer.phar /usr/local/bin/composer`` puis ``composer install``
