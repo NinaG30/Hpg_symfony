@@ -14,21 +14,23 @@ Le site propose aux utilisateurs :
 
 ## Pour commencer
 
-- Créer un dossier
+- Créer un premier dossier
 - A l'intérieur, créer un dossier "app" et cloner le repo
 - Toujours dans le premier dossier, créer un dossier "php" et copier/coller le Dockerfile du projet dedans
+  Aussi dans le premier dossier, créer un fichier "nginx" et copier/coller le default.conf
 - Dans le premier dossier, copier/coller le docker-compose.yml
 
 ### Pré-requis
 
 * Docker - https://www.docker.com/products/docker-desktop/
 * Composer (possiblement) - https://getcomposer.org/download/
+* Git
+* Visual Studio code
 
 ### Installation
 
 * Executer la commande ``docker compose up -d`` en étant dans le dossier qui a le fichier docker-compose.yml pour créer les conteneurs nécessaires
 * Dans le dossier app, executer ``docker-compose exec php /bin/bash`` pour entrer dans le conteneur
-* Executer la commande ``composer install`` pour installer les dépendances du projet
 * Pour créer la base de données, executer la commande ``php bin/console doctrine:migrations:migrate``
 
 ## Démarrage
