@@ -31,15 +31,12 @@ Le site propose aux utilisateurs :
 ### Installation
 
 * Lancer Docker Desktop
-* Executer la commande ``docker compose up -d`` en étant dans le dossier qui a le fichier docker-compose.yml pour créer les conteneurs nécessaires
-* Lancer Visual Studio code et ouvrir dedans le dossier cloné
-* Lancer les conteneurs si ce n'est pas déj fait
-* En bas à gauche de visual studio code, cliquer sur la sorte de petit éclair et attacher au conteneur d'execution
-* 
-* Ouvrir un nouveau terminal
-* Dans le dossier app, executer ``docker-compose exec php /bin/bash`` pour entrer dans le conteneur
-* Aller dans le dossier comportant le projet (avec la ligne de commande `cd`
-* Pour créer la base de données, executer la commande ``php bin/console doctrine:migrations:migrate``
+* Dans le premier dossier ou se trouve le fichier "docker-compose.yml", ouvir dans le terminal et executer la commande ``docker compose up -d``  pour créer les conteneurs nécessaires
+* Executer la commande ``docker-compose exec php /bin/bash`` puis ``cd ../`` puis ``cd hgp_symfony`` puis ``cd Hpg_symfony`` puis ``php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+php composer-setup.php
+php -r "unlink('composer-setup.php');"
+mv composer.phar /usr/local/bin/composer`` puis ``composer install``
+* Pour créer la base de données, si ce n'est pas déjà le cas, executer la commande ``php bin/console doctrine:migrations:migrate``
 
 ## Démarrage
 
